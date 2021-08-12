@@ -19,13 +19,13 @@ namespace WebMvcNetCore.Controllers
             _context = context;
         }
 
-        // GET: Departamentoes
+        // GET: Departamentos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Departamento.ToListAsync());
         }
 
-        // GET: Departamentoes/Details/5
+        // GET: Departamentos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace WebMvcNetCore.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Create
+        // GET: Departamentos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Departamentoes/Create
+        // POST: Departamentos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace WebMvcNetCore.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Edit/5
+        // GET: Departamentos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace WebMvcNetCore.Controllers
             return View(departamento);
         }
 
-        // POST: Departamentoes/Edit/5
+        // POST: Departamentos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace WebMvcNetCore.Controllers
             return View(departamento);
         }
 
-        // GET: Departamentoes/Delete/5
+        // GET: Departamentos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace WebMvcNetCore.Controllers
             return View(departamento);
         }
 
-        // POST: Departamentoes/Delete/5
+        // POST: Departamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

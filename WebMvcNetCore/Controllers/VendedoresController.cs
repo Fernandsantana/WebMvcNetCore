@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMvcNetCore.Models;
 using WebMvcNetCore.Serviços;
 
 namespace WebMvcNetCore.Controllers
@@ -21,6 +22,19 @@ namespace WebMvcNetCore.Controllers
             var list = _servicoVendedor.FindAll();
 
             return View(list);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Vendedor vendedor)
+        {
+            _servicoVendedor.Insert(vendedor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

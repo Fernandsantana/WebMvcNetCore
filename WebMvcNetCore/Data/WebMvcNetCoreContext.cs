@@ -14,6 +14,8 @@ namespace WebMvcNetCore.Data
         {
         }
 
-        public DbSet<WebMvcNetCore.Models.Departamento> Departamento { get; set; }
+        public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Vendedor> Vendedor { get; set; }
+        public DbSet<Venda> Venda { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebMvcNetCore.Data;
+using WebMvcNetCore.Serviços;
 
 namespace WebMvcNetCore
 {
@@ -37,6 +38,8 @@ namespace WebMvcNetCore
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext < WebMvcNetCoreContext>(options => options.UseMySql(Configuration.GetConnectionString("WebMvcNetCoreContext"), builder => builder.MigrationsAssembly("WebMvcNetCore")));
+
+            services.AddScoped<ServicoVendedor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

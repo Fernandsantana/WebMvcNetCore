@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebMvcNetCore.Data;
 using WebMvcNetCore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebMvcNetCore.Serviços
 {
@@ -29,7 +30,7 @@ namespace WebMvcNetCore.Serviços
 
         public Vendedor FindById (int id)
         {
-            return _context.Vendedor.FirstOrDefault(obj => obj.Id == id);
+            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove (int id)

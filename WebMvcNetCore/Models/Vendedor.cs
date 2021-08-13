@@ -18,6 +18,8 @@ namespace WebMvcNetCore.Models
 
         public Departamento Departamento { get; set; }
 
+        public int DepartamentoId { get; set; }
+
         public ICollection<Venda> Vendas { get; set; } = new List<Venda>();
 
         public Vendedor()

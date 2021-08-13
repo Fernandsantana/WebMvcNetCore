@@ -40,6 +40,8 @@ namespace WebMvcNetCore
             services.AddDbContext < WebMvcNetCoreContext>(options => options.UseMySql(Configuration.GetConnectionString("WebMvcNetCoreContext"), builder => builder.MigrationsAssembly("WebMvcNetCore")));
 
             services.AddScoped<ServicoVendedor>();
+           
+            services.AddScoped<ServicoDepartamento>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

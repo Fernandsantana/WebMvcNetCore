@@ -10,20 +10,27 @@ namespace WebMvcNetCore.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "{0} necessário")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Tamanho do {0} deve ser entre {1} a {2}")]
         [Display(Name = "Nome Completo")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "{0} necessário")]
+        [EmailAddress(ErrorMessage = "{0} inválido")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} necessário")]
         [Display (Name = "Aniversário")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime Aniversario { get; set; }
 
+        [Required(ErrorMessage = "{0} necessário")]
         [Display(Name = "Salário")]
         [DisplayFormat(DataFormatString ="{0:F2}")]
+        [Range(0.0, 10000.0, ErrorMessage = "{0} deve ser entre {1} a {2}")]
         public double Salario { get; set; }
 
         public Departamento Departamento { get; set; }

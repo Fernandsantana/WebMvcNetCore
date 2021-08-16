@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 
@@ -8,16 +9,26 @@ namespace WebMvcNetCore.Models
     public class Vendedor
     {
         public int Id { get; set; }
+
+        [Display(Name = "Nome Completo")]
         public string Nome { get; set; }
 
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        [Display (Name = "Aniversário")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime Aniversario { get; set; }
 
+        [Display(Name = "Salário")]
+        [DisplayFormat(DataFormatString ="{0:F2}")]
         public double Salario { get; set; }
 
         public Departamento Departamento { get; set; }
 
+        [Display(Name = "Departamento")]
         public int DepartamentoId { get; set; }
 
         public ICollection<Venda> Vendas { get; set; } = new List<Venda>();

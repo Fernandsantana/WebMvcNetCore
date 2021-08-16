@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvcNetCore.Models;
@@ -47,14 +48,14 @@ namespace WebMvcNetCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!"});
             }
 
             var obj = _servicoVendedor.FindById(id.Value);
 
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             return View(obj);
@@ -72,14 +73,14 @@ namespace WebMvcNetCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
             var obj = _servicoVendedor.FindById(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             return View(obj);
@@ -89,14 +90,14 @@ namespace WebMvcNetCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
             var obj = _servicoVendedor.FindById(id.Value);
 
             if(obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
             List<Departamento> departamentos = _servicoDepartamento.FindAll();
@@ -110,7 +111,7 @@ namespace WebMvcNetCore.Controllers
         {
             if(id != vendedor.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id incompatível!" });
             }
 
             try
@@ -119,14 +120,20 @@ namespace WebMvcNetCore.Controllers
 
                 return RedirectToAction(nameof(Index));
             }  
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

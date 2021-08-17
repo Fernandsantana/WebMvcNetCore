@@ -22,44 +22,44 @@ namespace WebMvcNetCore.Controllers
             _servicoDepartamento = servicoDepartamento;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _servicoVendedor.FindAll();
+            var list = await _servicoVendedor.FindAllAsync();
 
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var departamentos = _servicoDepartamento.FindAll();
+            var departamentos = await _servicoDepartamento.FindAllaAsync();
             var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vendedor vendedor)
+        public async Task<IActionResult> Create(Vendedor vendedor)
         {
             if (!ModelState.IsValid)
             {
-                var departamentos = _servicoDepartamento.FindAll();
+                var departamentos = await _servicoDepartamento.FindAllaAsync();
                 var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
 
                 return View(viewModel);
             }
 
-            _servicoVendedor.Insert(vendedor);
+            await _servicoVendedor.InsertAsync(vendedor);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!"});
             }
 
-            var obj = _servicoVendedor.FindById(id.Value);
+            var obj = await _servicoVendedor.FindByIdAsync(id.Value);
 
             if(obj == null)
             {
@@ -71,20 +71,20 @@ namespace WebMvcNetCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _servicoVendedor.Remove(id);
+            await _servicoVendedor.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details (int? id)
+        public async Task<IActionResult> Details (int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
-            var obj = _servicoVendedor.FindById(id.Value);
+            var obj = await _servicoVendedor.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -94,32 +94,32 @@ namespace WebMvcNetCore.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido!" });
             }
 
-            var obj = _servicoVendedor.FindById(id.Value);
+            var obj = await _servicoVendedor.FindByIdAsync(id.Value);
 
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado!" });
             }
 
-            List<Departamento> departamentos = _servicoDepartamento.FindAll();
+            List<Departamento> departamentos = await _servicoDepartamento.FindAllaAsync();
             VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Vendedor vendedor)
+        public async Task<IActionResult> Edit(int id, Vendedor vendedor)
         {
             if (!ModelState.IsValid)
             {
-                var departamentos = _servicoDepartamento.FindAll();
+                var departamentos = await _servicoDepartamento.FindAllaAsync();
                 var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
 
                 return View(viewModel);
@@ -132,7 +132,7 @@ namespace WebMvcNetCore.Controllers
 
             try
             {
-                _servicoVendedor.Update(vendedor);
+                await _servicoVendedor.UpdateAsync(vendedor);
 
                 return RedirectToAction(nameof(Index));
             }  

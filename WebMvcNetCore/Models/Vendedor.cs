@@ -67,7 +67,7 @@ namespace WebMvcNetCore.Models
 
         public double TotalVenda(DateTime inicial, DateTime final)
         {
-            return Vendas.Where(v => v.Data >= inicial && v.Data <= final).Sum(v => v.Quantidade);
+            return Vendas.Where(v => v.Data >= inicial && v.Data <= final).Sum(v => v.Valor);
         }
 
     }

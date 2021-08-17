@@ -9,7 +9,7 @@ namespace WebMvcNetCore.Models
 
         public DateTime Data { get; set; }
 
-        public double Quantidade { get; set; }
+        public double Valor { get; set; }
 
         public StatusVenda Status { get; set; }
 
@@ -20,11 +20,11 @@ namespace WebMvcNetCore.Models
 
         }
 
-        public Venda(int id, DateTime data, double quantidade, StatusVenda status, Vendedor vendedor)
+        public Venda(int id, DateTime data, double valor, StatusVenda status, Vendedor vendedor)
         {
             Id = id;
             Data = data;
-            Quantidade = quantidade;
+            Valor = valor;
             Status = status;
             Vendedor = vendedor;
         }
